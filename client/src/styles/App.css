@@ -1,0 +1,37 @@
+.main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 64px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+  padding: 80px;
+  border: solid white 2px;
+  border-radius: 10px;
+  background-color: #d2b48c;
+}
+
+.header {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.description {
+  text-align: center;
+  color: black;
+  margin-top: 16px;
+}
+
+.button {
+  cursor: pointer;
+  margin-top: 16px;
+  padding: 8px;
+  border: 0;
+  border-radius: 5px;
+}
