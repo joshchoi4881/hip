@@ -114,7 +114,7 @@ const App = () => {
 
   const getRecs = async () => {
     try {
-      const txn = await contract.getRecs();
+      let txn = await contract.getRecs();
       const recs = txn.map((rec) => {
         return {
           address: rec.sender,
@@ -134,7 +134,7 @@ const App = () => {
 
   const recommend = async () => {
     try {
-      const txn = await contract.rec(artist, song, link, {
+      let txn = await contract.rec(artist, song, link, {
         gasLimit: 1000000,
       });
       await txn.wait();
@@ -214,7 +214,7 @@ const App = () => {
                 rec.timestamp.getDate() +
                 ", " +
                 rec.timestamp.getFullYear();
-              const txn = "https://rinkeby.etherscan.io/address/" + rec.address;
+              let txn = "https://rinkeby.etherscan.io/address/" + rec.address;
               const link = rec.link.split("?v=")[1];
               return (
                 <div
