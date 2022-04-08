@@ -30,8 +30,13 @@
 
 .button {
   cursor: pointer;
-  margin-top: 16px;
+  margin: 40px 0px 40px 0px;
   padding: 8px;
   border: 0;
   border-radius: 5px;
+}
+
+.link {
+  color: #aa336a;
+  text-decoration: none;
 }

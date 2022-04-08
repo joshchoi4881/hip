@@ -5,6 +5,20 @@ import "./styles/App.css";
 
 const REACT_APP_CONTRACT_ADDRESS = process.env.REACT_APP_CONTRACT_ADDRESS;
 const HIP = Hip.abi;
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 const App = () => {
   const [contract, setContract] = useState(null);
@@ -21,9 +35,13 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    contract.on("NewRec", onNewRec);
+    if (contract) {
+      contract.on("NewRec", onNewRec);
+    }
     return () => {
-      contract.off("NewRec", onNewRec);
+      if (contract) {
+        contract.off("NewRec", onNewRec);
+      }
     };
   }, [contract]);
 
@@ -169,45 +187,62 @@ const App = () => {
           </>
         ) : (
           <>
-            <br />
-            <p>artist:</p>
+            <p>artist</p>
             <input value={artist} onChange={(e) => setArtist(e.target.value)} />
-            <p>song:</p>
+            <p>song</p>
             <input value={song} onChange={(e) => setSong(e.target.value)} />
-            <p>link:</p>
+            <p>youtube link</p>
             <input value={link} onChange={(e) => setLink(e.target.value)} />
             <button className="button" onClick={recommend}>
               send rec
             </button>
             {recs.map((rec, i) => {
+              const address =
+                rec.address.substring(0, 8) +
+                "..." +
+                rec.address.substring(rec.address.length - 3);
+              const date =
+                rec.timestamp.getHours() +
+                ":" +
+                rec.timestamp.getMinutes() +
+                " on " +
+                MONTHS[rec.timestamp.getMonth() + 1] +
+                " " +
+                rec.timestamp.getDate() +
+                ", " +
+                rec.timestamp.getFullYear();
+              const txn = "https://rinkeby.etherscan.io/address/" + rec.address;
+              const link = rec.link.split("?v=")[1];
               return (
                 <div
                   key={i}
                   style={{
-                    padding: "8px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    padding: "20px",
                     border: "solid white 2px",
                     borderRadius: "10px",
-                    marginTop: "16px",
                     backgroundColor: "OldLace",
                   }}
                 >
-                  <div>
-                    {rec.address} @ {rec.timestamp.toString()}
-                  </div>
-                  <div>
+                  <p>
+                    <a className="link" href={txn} target="_blank">
+                      {address} @ {date}
+                    </a>
+                  </p>
+                  <p>
                     {rec.song} by {rec.artist}
-                  </div>
-                  <div>
-                    <iframe
-                      width="560"
-                      height="315"
-                      src={rec.link}
-                      title="YouTube video player"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
+                  </p>
+                  <iframe
+                    width="560"
+                    height="315"
+                    src={"https://www.youtube.com/embed/" + link}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
                 </div>
               );
             })}
