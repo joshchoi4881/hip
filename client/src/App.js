@@ -141,6 +141,9 @@ const App = () => {
     } catch (error) {
       console.error(error);
     }
+    setArtist("");
+    setSong("");
+    setLink("");
   };
 
   const onNewRec = (
@@ -223,6 +226,7 @@ const App = () => {
                     padding: "20px",
                     border: "solid white 2px",
                     borderRadius: "10px",
+                    margin: "20px 0px 20px 0px",
                     backgroundColor: "OldLace",
                   }}
                 >
