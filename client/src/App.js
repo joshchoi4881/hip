@@ -206,7 +206,7 @@ const App = () => {
             <button className="button" onClick={recommend}>
               send rec
             </button>
-            {recs.map((rec, i) => {
+            {recs.reverse().map((rec, i) => {
               const address =
                 rec.address.substring(0, 5) +
                 "..." +
