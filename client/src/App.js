@@ -154,8 +154,8 @@ const App = () => {
   };
 
   const onNewRec = (
-    recId,
     sender,
+    recId,
     timestamp,
     artist,
     song,
@@ -166,8 +166,8 @@ const App = () => {
     setRecs((prev) => [
       ...prev,
       {
-        id: recId,
         address: sender,
+        id: recId,
         timestamp: new Date(timestamp * 1000),
         artist,
         song,

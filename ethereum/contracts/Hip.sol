@@ -13,8 +13,8 @@ contract Hip {
     using Counters for Counters.Counter;
     Counters.Counter private recId;
     struct Rec {
-        uint256 recId;
         address sender;
+        uint256 recId;
         uint256 timestamp;
         string artist;
         string song;
@@ -26,8 +26,8 @@ contract Hip {
     mapping(address => uint256) private lastRecTimestamp;
     /* uint256 private seed; */
     event NewRec(
-        uint256 recId,
         address sender,
+        uint256 recId,
         uint256 timestamp,
         string artist,
         string song,
@@ -45,15 +45,15 @@ contract Hip {
         string memory _artist,
         string memory _song,
         string memory _link
-    ) public {
+    ) external {
         require(
             lastRecTimestamp[msg.sender] + 15 seconds < block.timestamp,
             "wait 15 seconds before making another rec"
         );
         uint256 _recId = recId.current();
         Rec memory newRec = Rec(
-            _recId,
             msg.sender,
+            _recId,
             block.timestamp,
             _artist,
             _song,
@@ -75,8 +75,8 @@ contract Hip {
         } */
         recId.increment();
         emit NewRec(
-            _recId,
             msg.sender,
+            _recId,
             block.timestamp,
             _artist,
             _song,
@@ -86,7 +86,7 @@ contract Hip {
         );
     }
 
-    function getRecs() public view returns (Rec[] memory) {
+    function getRecs() external view returns (Rec[] memory) {
         return recs;
     }
 }
