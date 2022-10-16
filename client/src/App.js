@@ -20,15 +20,22 @@ const MONTHS = [
   "Dec",
 ];
 
+const DEFAULT_CONTRACT = null;
+const DEFAULT_ACCOUNT = null;
+const DEFAULT_CHAIN = null;
+const DEFAULT_ARTIST = "";
+const DEFAULT_SONG = "";
+const DEFAULT_LINK = "";
+const DEFAULT_RECS = [];
+
 const App = () => {
-  const [contract, setContract] = useState(null);
-  const [account, setAccount] = useState(null);
-  const [chain, setChain] = useState(null);
-  const [artist, setArtist] = useState("");
-  const [song, setSong] = useState("");
-  const [link, setLink] = useState("");
-  const [recs, setRecs] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [contract, setContract] = useState(DEFAULT_CONTRACT);
+  const [account, setAccount] = useState(DEFAULT_ACCOUNT);
+  const [chain, setChain] = useState(DEFAULT_CHAIN);
+  const [artist, setArtist] = useState(DEFAULT_ARTIST);
+  const [song, setSong] = useState(DEFAULT_SONG);
+  const [link, setLink] = useState(DEFAULT_LINK);
+  const [recs, setRecs] = useState(DEFAULT_RECS);
 
   useEffect(() => {
     isConnected();
@@ -114,7 +121,7 @@ const App = () => {
 
   const getRecs = async () => {
     try {
-      let txn = await contract.getRecs();
+      const txn = await contract.getRecs();
       const recs = txn.map((rec) => {
         return {
           address: rec.sender,
@@ -134,7 +141,7 @@ const App = () => {
 
   const recommend = async () => {
     try {
-      let txn = await contract.rec(artist, song, link, {
+      const txn = await contract.rec(artist, song, link, {
         gasLimit: 1000000,
       });
       await txn.wait();
@@ -201,7 +208,7 @@ const App = () => {
             </button>
             {recs.map((rec, i) => {
               const address =
-                rec.address.substring(0, 8) +
+                rec.address.substring(0, 5) +
                 "..." +
                 rec.address.substring(rec.address.length - 3);
               const date =
@@ -214,7 +221,7 @@ const App = () => {
                 rec.timestamp.getDate() +
                 ", " +
                 rec.timestamp.getFullYear();
-              let txn = "https://rinkeby.etherscan.io/address/" + rec.address;
+              const txn = "https://goerli.etherscan.io/address/" + rec.address;
               const link = rec.link.split("?v=")[1];
               return (
                 <div

@@ -2,8 +2,8 @@
 
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 
 uint256 constant DEFAULT_UPVOTE = 0;
@@ -22,8 +22,8 @@ contract Hip {
         uint256 upvotes;
         uint256 downvotes;
     }
-    Rec[] recs;
-    mapping(address => uint256) public lastRecTimestamp;
+    Rec[] private recs;
+    mapping(address => uint256) private lastRecTimestamp;
     /* uint256 private seed; */
     event NewRec(
         uint256 recId,
