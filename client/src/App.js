@@ -148,9 +148,9 @@ const App = () => {
     } catch (error) {
       console.error(error);
     }
-    setArtist("");
-    setSong("");
-    setLink("");
+    setArtist(DEFAULT_ARTIST);
+    setSong(DEFAULT_SONG);
+    setLink(DEFAULT_LINK);
   };
 
   const onNewRec = (
