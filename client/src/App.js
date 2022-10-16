@@ -46,7 +46,7 @@ const App = () => {
   }, [contract]);
 
   useEffect(() => {
-    if (contract && account && chain === "0x4") {
+    if (contract && account && chain === "0x5") {
       getRecs();
     }
   }, [contract, account, chain]);
@@ -103,7 +103,7 @@ const App = () => {
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: "0x4" }],
+        params: [{ chainId: "0x5" }],
       });
       const chainId = await window.ethereum.request({ method: "eth_chainId" });
       setChain(chainId);
@@ -182,10 +182,10 @@ const App = () => {
               connect metamask
             </button>
           </>
-        ) : chain !== "0x4" ? (
+        ) : chain !== "0x5" ? (
           <>
             <button className="button" onClick={switchChain}>
-              switch to rinkeby
+              switch to goerli
             </button>
           </>
         ) : (

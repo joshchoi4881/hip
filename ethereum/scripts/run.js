@@ -7,7 +7,7 @@ const main = async () => {
   let txn = await contract.rec(
     "CHYL",
     "Mercy (CHYL Flip)",
-    '<iframe width="560" height="315" src="https://www.youtube.com/embed/cc7q_ff5Sto" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+    "https://www.youtube.com/watch?v=cc7q_ff5Sto"
   );
   await txn.wait();
   txn = await contract.getRecs();
