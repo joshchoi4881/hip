@@ -182,7 +182,7 @@ const App = () => {
     <div className="main">
       <div className="card">
         <div className="header">hip</div>
-        <div className="description">send some music recs homie</div>
+        <div className="description">send music recs homie</div>
         {!account ? (
           <button className="button" onClick={connectWallet}>
             connect metamask
